@@ -3,6 +3,9 @@ import 'onBoarding.dart';
 import 'DashBoardStudent.dart';
 import 'DashBoardSec.dart';
 import 'alertPage.dart';
+import 'DashBoardAdmin.dart';
+import 'DashBoardWarden.dart';
+import 'checkInPage.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  DashBoardSec(),
+      home:  OnBoardingScreen(),
     );
   }
 }
