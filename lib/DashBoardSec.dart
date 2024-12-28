@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'alertPage.dart';
-import 'outPage.dart';
+import 'outPageStudent.dart';
 
 class DashBoardSec extends StatefulWidget {
   @override
@@ -102,10 +102,11 @@ class _DashBoardSecState extends State<DashBoardSec> {
           Expanded(
             child: ListView(
               children: [
-                _buildListItem('John Doe', 'Hostel A', 'Active SOS', Colors.red),
-                _buildListItem('Jane Smith', 'Hostel B', 'Out', Colors.yellow),
-                _buildListItem('Alice Johnson', 'Hostel C', 'Past Curfew', Colors.red),
-                _buildListItem('Bob Brown', 'Hostel A', 'In Hostel', Colors.green),
+                _buildListItem('John Doe', 'Hostel A', 'Active SOS', Colors.red, false),
+                _buildListItem('Jane Smith', 'Hostel B', 'Out', Colors.yellow, false),
+                _buildListItem('Alice Johnson', 'Hostel C', 'Past Curfew', Colors.red, true), // Safe
+                _buildListItem('Bob Brown', 'Hostel A', 'Past Curfew', Colors.red, false), // Not Safe
+                _buildListItem('Charlie Davis', 'Hostel A', 'In Hostel', Colors.green, false),
                 // Add more list items here
               ],
             ),
@@ -137,22 +138,34 @@ class _DashBoardSecState extends State<DashBoardSec> {
     );
   }
 
-  Widget _buildListItem(String name, String hostel, String status, Color color) {
+  Widget _buildListItem(String name, String hostel, String status, Color color, bool isSafe) {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: ListTile(
         title: Text(name),
         subtitle: Text('$hostel - $status'),
-        trailing: Container(
-          padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          child: Text(
-            status,
-            style: TextStyle(color: Colors.black),
-          ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (status == 'Past Curfew')
+              Icon(
+                Icons.circle,
+                color: isSafe ? Colors.green : Colors.red,
+                size: 16.0,
+              ),
+            SizedBox(width: 8.0),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 4.0),
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Text(
+                status,
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
+          ],
         ),
         onTap: () {
           if (status == 'Active SOS') {
@@ -163,7 +176,7 @@ class _DashBoardSecState extends State<DashBoardSec> {
           } else if (status == 'Out') {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Outpage()),
+              MaterialPageRoute(builder: (context) => OutPage()),
             );
           }
         },
