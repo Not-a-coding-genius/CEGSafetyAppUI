@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     const TextField(
                       decoration: InputDecoration(
                         suffixIcon: Icon(Icons.check,color: Colors.grey,),
-                        label: Text('Gmail',style: TextStyle(
+                        label: Text('University Mail',style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color:Color(0xFF424242),
                         ),)
